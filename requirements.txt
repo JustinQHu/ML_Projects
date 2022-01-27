@@ -1,0 +1,3 @@
+#packages required for the projects
+jupyter==1.0.0
+gym==0.21.0
