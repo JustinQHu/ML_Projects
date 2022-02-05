@@ -1,5 +1,7 @@
-#packages required for the projects
+#packages required for all different projects
 jupyter
 gym
 experta
 schema
+matplotlib
+pandas

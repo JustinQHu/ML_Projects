@@ -10,3 +10,5 @@ Projects:
    1. Simple AnimalChecker
    2. More Complex AnimalIdentifier
    3. Interactive SpaceBot
+3. Linear Classification
+   1. Linear Support Vector Machine(SVM)
