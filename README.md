@@ -4,7 +4,7 @@ Projects for Business Analytics and AI/ML classes
 AI Projects/Models:
 
 1. Knowledge Engineering(og)
-   1.Expert System
+   1. Expert System
       1. Simple AnimalChecker
       2. More Complex AnimalIdentifier
       3. Interactive SpaceBot
