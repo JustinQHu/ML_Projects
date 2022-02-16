@@ -24,3 +24,8 @@ AI Projects/Models:
          3. Gradient Boosting
             1. HistGradientBoosting
             2. XGBoosting
+   2. Unsupervised learning
+      1. Clustering
+         1. K-means
+         2. GaussianMixture(GMM)
+         3. DBSCAN
