@@ -132,8 +132,8 @@ class TitanicSurvival:
         missing = pd.concat([missing, percent], axis=1, keys=['Total', '%'])
         print(missing)
 
-        # exlore data further with visualization
-        # survived vs unsurvied
+        # explore data further with visualization
+        # survived vs unsurvived
         f, ax = plt.subplots()
         ax.set_title('Survived')
 
@@ -194,7 +194,7 @@ class TitanicSurvival:
             plt.title(f'Count of Survival in {feature} Feature',size=20, y=1.05)
         plt.show()
 
-        # correlation between features# data.corr()-->correlation matrix
+        # correlation between features
         sb.heatmap(self.df_train.corr(), annot=True, cmap='RdYlGn', linewidths=0.2)
         fig = plt.gcf()
         fig.set_size_inches(10, 8)
@@ -337,8 +337,8 @@ class TitanicSurvival:
             2. Linear -SVM
             3. Random forest
             4. XGBoost
-
-        here, we use 10 (k = 10) folds in cross validation
+        Here, we use 10 (k = 10) folds in cross validation. Accuracy, f1, and roc_auc are used in cross validation.
+        Ultimately, I choose Random forest and use GridSearchCV() to find the best hyperparameters for random forest
         :return:
         """
         y_train = self.df_train['Survived'].values
@@ -380,7 +380,6 @@ class TitanicSurvival:
         # 82.83  Logistic Regression
         # 82.72           Linear SVM
         # In simple comparison,  random forest has the best score
-
 
         # Cross validation
         # Logistic regression
@@ -491,6 +490,11 @@ class TitanicSurvival:
 
 
 def compare_train_and_kaggle_score():
+    """
+    BestCrossValidation score is printed out before.
+    Kaggle score is 0.78229 and ranks 2632 for the first submission.
+    :return:
+    """
     df = pd.DataFrame({
         "Scenario": ['BestCrossValidation', 'Kaggle'],
         "Score": ['0.8473', '0.78229']
