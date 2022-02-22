@@ -5,3 +5,4 @@ experta
 schema
 matplotlib
 pandas
+seaborn
