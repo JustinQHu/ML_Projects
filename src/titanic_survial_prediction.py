@@ -84,6 +84,7 @@ class TitanicSurvival:
         # 4. Family_size(SibSP + Parch) does impact the chance of survival
         # 5. Embarked may impact the probability of survival
         # 6. Cabin has a missing rate of 77.1%,  can't use it directly. Will not use it initially.
+        #    Retrospectively speaking, not using Cabin has caused around 1 - 2% loss in prediction accuracy.
         # 7. Age has a missing rate of 19.9, something needs to be done.
         # 8. Fare may impact the survival probability
 
@@ -437,7 +438,7 @@ class TitanicSurvival:
         #print(gd.best_score_)
         #print(gd.best_estimator_)
 
-        # Train Random forest to  with hyperparameters found in tuning
+        # Train Random forest to  with hyperparameters found in tuning: n_estimators=11000, min_samples_leaf=5
         print()
         print('train random forest with chosen hyperparameters')
         random_forest = RandomForestClassifier(criterion='gini',
@@ -489,6 +490,16 @@ class TitanicSurvival:
         df.to_csv('submission.csv', index=False)
 
 
+def compare_train_and_kaggle_score():
+    df = pd.DataFrame({
+        "Scenario": ['BestCrossValidation', 'Kaggle'],
+        "Score": ['0.8473', '0.78229']
+    })
+
+    print('performance comparison between best validation and Kaggle')
+    print(df)
+
+
 def main():
     c = TitanicSurvival()
     c.load_data()
@@ -497,6 +508,7 @@ def main():
     c.train_and_evaluate_model()
     y_prediction = c.predict()
     c.save_to_submission(y_prediction)
+    compare_train_and_kaggle_score()
 
 
 if __name__ == '__main__':
