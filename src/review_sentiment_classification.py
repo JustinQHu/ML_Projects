@@ -9,7 +9,6 @@ import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.pipeline import Pipeline
 from sklearn.linear_model import SGDClassifier
-from sklearn.naive_bayes import MultinomialNB
 from sklearn import metrics
 from sklearn.model_selection import GridSearchCV
 
@@ -54,6 +53,7 @@ class SentimentCls:
         self.df_review = None
         self.df_train = None
         self.df_valid = None
+        self.df_test = None
         self.model = None
 
     def load_data(self):
@@ -159,28 +159,58 @@ class SentimentCls:
         sentiment_clf.fit(self.df_train['Review'], self.df_train['Sentiment'])
         self.model = sentiment_clf
 
-    def evaluate_model(self):
+    def evaluate(self, target_set):
+        """
+        evaluate the model on the target dataset
+        target set could be:
+            1. validation set
+            2. test set
+        :param target_set:
+        :return:
+        """
+        predicted = self.model.predict(target_set['Review'])
+        print('accuracy on the validation set')
+        print(np.mean(predicted == target_set['Sentiment']))
+
+        print(metrics.classification_report(target_set['Sentiment'], predicted,
+                                            target_names=['negative', 'neutral', 'positive']))
+
+        print('confusion matrix:')
+        print(metrics.confusion_matrix(target_set['Sentiment'], predicted))
+
+    def evaluate_model_on_validation(self):
         """
         evaluate the model of sentiment classification
         :return:
         """
-        predicted = self.model.predict(self.df_valid['Review'])
-        print('accuracy on the validation set')
-        print(np.mean(predicted == self.df_valid['Sentiment']))
+        print('evaluate model on the validation set:')
+        self.evaluate(self.df_valid)
 
-        print(metrics.classification_report(self.df_valid['Sentiment'], predicted,
-                                            target_names=['negative', 'neutral', 'positive']))
-
-        print('confusion matrix:')
-        print(metrics.confusion_matrix(self.df_valid['Sentiment'], predicted))
+    def evaluate_model_on_test(self):
+        """
+        The function is for instructor to evaluate the code on a test dataset test.csv
+        Assuming test.csv is separated by comma, otherwise please change parameters of read_csv accordingly.
+        :return:
+        """
+        self.df_test = pd.read_csv('test.csv')
+        if self.df_test.empty:
+            print('test set is empty!')
+        else:
+            print('evaluate model on the test set:')
+            self.evaluate(self.df_test)
 
 
 def main():
+    """
+    please use evaluate_model_on_test to evaluate the model on test dataset
+    :return:
+    """
     c = SentimentCls()
     c.load_data()
     c.transform_data()
     c.train_model()
-    c.evaluate_model()
+    c.evaluate_model_on_validation()
+    # c.evaluate_model_on_test()
 
 
 if __name__ == '__main__':
