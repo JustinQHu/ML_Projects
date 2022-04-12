@@ -93,7 +93,10 @@ class SentimentCls:
         # bin RatingValue to Sentiment following the rule
         self.df_review['Sentiment'] = self.df_review['RatingValue'].apply(lambda x: SentimentCls.binning_map[x])
 
-        # print out the first 10 row to check the binning results
+        # remove newlines in text
+        self.df_review['Review'] = self.df_review['Review'].apply(lambda x: x.replace('\n', ' '))
+
+        # print out the first 10 row to check the results
         print(self.df_review.head(10))
 
         # partition the dataset

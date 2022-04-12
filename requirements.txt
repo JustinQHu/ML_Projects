@@ -7,5 +7,6 @@ matplotlib
 pandas
 seaborn
 xgboost
-numpy
+numpy==1.22.3
 sklearn
+sent2vec
