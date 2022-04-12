@@ -35,9 +35,9 @@ class SentimentCls:
     """
 
     # binning rules:
-    # rating 1 & 2 --> negative --> code 0
-    #                 rating 3  --> neutral --> code 1
-    #                 rating 4 & 5 --> positive --> code 2
+    #   rating 1 & 2 --> negative --> code 0
+    #   rating 3  --> neutral --> code 1
+    #   rating 4 & 5 --> positive --> code 2
     binning_map = {
         1: 0,
         2: 0,
