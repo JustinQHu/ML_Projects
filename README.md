@@ -1,4 +1,4 @@
-# ba_projects
+# ML_Projects
 Projects for Business Analytics and AI/ML classes
 
 AI Projects/Models:
